@@ -1,40 +1,47 @@
+using ExampleCompany.BoxGame.Box;
+using ExampleCompany.BoxGame.GameLogic;
 using UnityEngine;
 
-public class State_Idle : NPCState
+namespace ExampleCompany.BoxGame.NPC.StateMachine
 {
-    [SerializeField] NPCStateMachine stateMachine;
-    [SerializeField] NPCController controller;
-    [SerializeField] CubeSpawner cubeSpawner;
-
-    public override void EnterState()
+    /// <summary>
+    /// This is the initial state that is kept when there are no boxes to interact with.  Changes state when a new box is noticed.
+    /// </summary>
+    public class State_Idle : NPCState
     {
-        //stop movement.
-        controller.SetMovement(0f);
-    }
+        [SerializeField] NPCStateMachine stateMachine;
+        [SerializeField] NPCController controller;
+        [SerializeField] CubeSpawner cubeSpawner;
+        [SerializeField] State_GetCube state_getCube;
 
-    public override void Tick()
-    {
-        //Check for available blocks
-        if(cubeSpawner.activeCubePool.Count > 0)
+        public override void EnterState()
         {
-            //Get Closest Cube.
-            float closestDist = float.MaxValue;
-            GameObject closestCube = null;
-            foreach (var item in cubeSpawner.activeCubePool)
-            {
-                float thisDist = Vector3.Distance(controller.transform.position, item.transform.position);
-                if (thisDist < closestDist)
-                {
-                    closestDist = thisDist;
-                    closestCube = item;
-                }
-            }
+            //stop movement.
+            controller.StopMovement();
+        }
 
-            //change state - no longer idle.  Get to cube.
-            Debug.Log("GET TO CUBE! - " + closestCube.name);
+        public override void Tick()
+        {
+            //Check if there are available blocks
+            if (cubeSpawner.activeBoxPool.Count > 0)
+            {
+                //Get Closest Cube.
+                float closestDist = float.MaxValue;
+                Box.Box closestCube = null;
+                foreach (var item in cubeSpawner.activeBoxPool)
+                {
+                    float thisDist = Vector3.Distance(controller.transform.position, item.transform.position);
+                    if (thisDist < closestDist)
+                    {
+                        closestDist = thisDist;
+                        closestCube = item;
+                    }
+                }
+
+                //change state - no longer idle.  Get to cube.
+                state_getCube.SetTarget(closestCube);
+                stateMachine.ChangeState(state_getCube);
+            }
         }
     }
-
-    
-
 }

@@ -1,63 +1,106 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-public class NPCController : MonoBehaviour
+namespace ExampleCompany.BoxGame.NPC
 {
-    public Rigidbody2D rb2d;
-    public Transform faceTf;
-
-    float currentVelocity = 0f;
-    [SerializeField] float maxspeed;
-
-
-    public bool debugInputs = false;
-    private void Update()
+    public class NPCController : MonoBehaviour
     {
-        if (debugInputs)
+        [SerializeField] Rigidbody2D rb2d;
+        [SerializeField] Transform faceTf;
+
+        float currentVelocity { get { return _currentVelocity; } }
+        float _currentVelocity = 0f;
+
+        [SerializeField] float maxspeed;
+
+        private void FixedUpdate()
         {
-            //DEBUG: simple inputs to test movement.
-            if (Input.GetKeyDown(KeyCode.A))
+            rb2d.linearVelocityX = _currentVelocity;
+        }
+
+        readonly Vector3 faceOffsetLeft = new Vector3(-0.2f, 0f, 0f);
+        readonly Vector3 faceOffsetRight = new Vector3(0.2f, 0f, 0f);
+        /// <summary>
+        /// Starts moving the character in the intended direction, or stops it.
+        /// </summary>
+        /// <param name="speed">Horizontal speed.  positive it right, negative is left, 0 is stop..</param>
+        private void SetMovement(float speed)
+        {
+            _currentVelocity = speed;
+
+            if (speed < 0)
             {
-                SetMovement(maxspeed * -1);
+                faceTf.localPosition = faceOffsetLeft;
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (speed > 0)
             {
-                SetMovement(maxspeed);
+                faceTf.localPosition = faceOffsetRight;
             }
-            else if (Input.GetKeyDown(KeyCode.S))
+            else
             {
-                SetMovement(0);
+                faceTf.localPosition = Vector3.zero;
             }
         }
-    }
 
-    private void FixedUpdate()
-    {
-        rb2d.linearVelocityX = currentVelocity;
-    }
-
-
-    readonly Vector3 faceOffsetLeft = new Vector3(-0.2f, 0f, 0f);
-    readonly Vector3 faceOffsetRight = new Vector3(0.2f, 0f, 0f);
-    /// <summary>
-    /// Starts moving the character in the intended direction, or stops it.
-    /// </summary>
-    /// <param name="speed">Horizontal speed.  positive it right, negative is left, 0 is stop..</param>
-    public void SetMovement(float speed)
-    {
-        currentVelocity = speed;
-
-        if(speed < 0)
+        public void MoveLeft()
         {
-            faceTf.localPosition = faceOffsetLeft;
+            SetMovement(maxspeed * -1f);
         }
-        else if(speed > 0)
+        public void MoveRight()
         {
-            faceTf.localPosition = faceOffsetRight;
+            SetMovement(maxspeed);
         }
-        else
+        public void StopMovement()
         {
-            faceTf.localPosition = Vector3.zero;
+            SetMovement(0f);
         }
 
+
+        /// <summary>
+        /// Sends the NPC in the direction of the target.
+        /// </summary>
+        public void MoveTowardTarget(Vector3 target)
+        {
+            if (target.x < this.transform.position.x - 0.2f)
+            {
+                MoveLeft();
+            }
+            else if (target.x > this.transform.position.x + 0.2f)
+            {
+                MoveRight();
+            }
+            else
+            {
+                StopMovement();
+            }
+        }
+
+        /// <summary>
+        /// ensures that the NPC hasn't overshot the target.  Will reorient itself if necessary.
+        /// </summary>
+        public void VerifyHeading(Vector3 target)
+        {
+            if (currentVelocity < 0f)
+            {
+                if (target.x >= this.transform.position.x)
+                {
+                    MoveTowardTarget(target);
+                }
+            }
+            else if (currentVelocity > 0f)
+            {
+                if (target.x <= this.transform.position.x)
+                {
+                    MoveTowardTarget(target);
+                }
+            }
+            else
+            {
+                if (target.x > this.transform.position.x + 0.2f || target.x < this.transform.position.x - 0.2f)
+                {
+                    MoveTowardTarget(target);
+                }
+            }
+        }
     }
 }

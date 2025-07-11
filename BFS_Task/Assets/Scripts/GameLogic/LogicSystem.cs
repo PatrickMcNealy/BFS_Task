@@ -1,8 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class LogicSystem : MonoBehaviour
+namespace ExampleCompany.BoxGame.GameLogic
 {
-    public abstract void Init();
-    public abstract void FixedTick();
+    //This class is for high-level systems that must be kept track of by the Game Manager.  Important game-wide systems should extend this class.
+    public abstract class LogicSystem : MonoBehaviour
+    {
+        public abstract void Init();
+        public abstract void FixedTick();
+    }
 }

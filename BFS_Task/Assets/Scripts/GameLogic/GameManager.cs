@@ -3,23 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace ExampleCompany.BoxGame.GameLogic
 {
-    public List<LogicSystem> logicSystems;
-
-    private void Start()
+    /// <summary>
+    /// This class manages major game systems that must be kept track of and tick on regular intervals (every frame or less, depending.)
+    /// </summary>
+    public class GameManager : MonoBehaviour
     {
-        foreach (var item in logicSystems)
+        [SerializeField] List<LogicSystem> logicSystems;
+
+        private void Start()
         {
-            item.Init();
+            foreach (var item in logicSystems)
+            {
+                item.Init();
+            }
         }
-    }
 
-    private void FixedUpdate()
-    {
-        foreach (var item in logicSystems)
+        private void FixedUpdate()
         {
-            item.FixedTick();
+            foreach (var item in logicSystems)
+            {
+                item.FixedTick();
+            }
         }
     }
 }

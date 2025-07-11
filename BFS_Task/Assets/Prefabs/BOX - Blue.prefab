@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6859113548297591478, guid: 59238d1e11a2ed244a876d95c7a964c5, type: 3}
+      propertyPath: _color
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3397250016008328223, guid: 59238d1e11a2ed244a876d95c7a964c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.0504272
@@ -50,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5474962518402593579, guid: 59238d1e11a2ed244a876d95c7a964c5, type: 3}
       propertyPath: m_Name
-      value: BOX (1) Variant
+      value: BOX - Blue
       objectReference: {fileID: 0}
     - target: {fileID: 9038786653619741628, guid: 59238d1e11a2ed244a876d95c7a964c5, type: 3}
       propertyPath: m_Color.g

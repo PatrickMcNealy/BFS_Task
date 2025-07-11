@@ -1,0 +1,16 @@
+{
+    "name": "_Box",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5648336d54675fb4988fa0c8d80fb4b0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

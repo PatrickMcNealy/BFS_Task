@@ -752,6 +752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557213277}
   - component: {fileID: 557213278}
+  - component: {fileID: 557213279}
   m_Layer: 0
   m_Name: DropOff - Blue
   m_TagString: Untagged
@@ -829,6 +830,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &557213279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557213276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2477262213cd9a8418cf880bf580f823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +1041,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4a4a50fca26283c4998c78db0c5f6d90, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1234,12 +1247,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RedCube: {fileID: 2945259899936678339, guid: a3b829f145a79414d83a6fbef6bd4f0b, type: 3}
   BlueCube: {fileID: 6574206161684697167, guid: 45f85a59ac1a9d345a5f180966aa2a1a, type: 3}
-  minimumSpawnTimer: 5
-  maximumSpawnTimer: 10
+  minimumSpawnTimer: 2
+  maximumSpawnTimer: 4
   leftBounds: -6
   rightBounds: 6
   spawnHeight: 10
-  activeCubePool: []
+  activeBoxPool: []
 --- !u!114 &1298501438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1543,6 +1556,7 @@ GameObject:
   - component: {fileID: 1859208637}
   - component: {fileID: 1859208636}
   - component: {fileID: 1859208638}
+  - component: {fileID: 1859208639}
   m_Layer: 6
   m_Name: NPC State Machine
   m_TagString: Untagged
@@ -1580,6 +1594,7 @@ MonoBehaviour:
   stateMachine: {fileID: 1859208637}
   controller: {fileID: 1966907416}
   cubeSpawner: {fileID: 1298501437}
+  state_getCube: {fileID: 1859208638}
 --- !u!114 &1859208637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,6 +1620,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d128673fc82156a47b89c57610fa5499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 1966907416}
+  stateMachine: {fileID: 1859208637}
+  state_Idle: {fileID: 1859208636}
+  state_carryCube: {fileID: 1859208639}
+--- !u!114 &1859208639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859208634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073714b38e6d2e9419601162a294ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 1859208637}
+  state_idle: {fileID: 1859208636}
+  controller: {fileID: 1966907416}
+  cubeSpawner: {fileID: 1298501437}
+  targetDropoffRed: {fileID: 1722306632}
+  targetDropoffBlue: {fileID: 557213279}
 --- !u!1 &1966907411
 GameObject:
   m_ObjectHideFlags: 0
