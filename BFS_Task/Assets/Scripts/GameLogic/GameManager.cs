@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +8,7 @@ namespace ExampleCompany.BoxGame.GameLogic
     /// </summary>
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] List<LogicSystem> logicSystems;
+        [SerializeField] List<LogicSystem> logicSystems = new List<LogicSystem>();
 
         private void Start()
         {

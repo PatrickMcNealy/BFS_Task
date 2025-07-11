@@ -1,17 +1,16 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace ExampleCompany.BoxGame.NPC
 {
     public class NPCController : MonoBehaviour
     {
-        [SerializeField] Rigidbody2D rb2d;
-        [SerializeField] Transform faceTf;
+        [SerializeField] Rigidbody2D rb2d = null;
+        [SerializeField] Transform faceTf = null;
 
         float currentVelocity { get { return _currentVelocity; } }
         float _currentVelocity = 0f;
 
-        [SerializeField] float maxspeed;
+        [SerializeField] float maxspeed = 5f;
 
         private void FixedUpdate()
         {
@@ -20,6 +19,8 @@ namespace ExampleCompany.BoxGame.NPC
 
         readonly Vector3 faceOffsetLeft = new Vector3(-0.2f, 0f, 0f);
         readonly Vector3 faceOffsetRight = new Vector3(0.2f, 0f, 0f);
+        [SerializeField] float stopRange = 0.2f;
+
         /// <summary>
         /// Starts moving the character in the intended direction, or stops it.
         /// </summary>
@@ -61,11 +62,11 @@ namespace ExampleCompany.BoxGame.NPC
         /// </summary>
         public void MoveTowardTarget(Vector3 target)
         {
-            if (target.x < this.transform.position.x - 0.2f)
+            if (target.x < this.transform.position.x - stopRange)
             {
                 MoveLeft();
             }
-            else if (target.x > this.transform.position.x + 0.2f)
+            else if (target.x > this.transform.position.x + stopRange)
             {
                 MoveRight();
             }
@@ -96,7 +97,7 @@ namespace ExampleCompany.BoxGame.NPC
             }
             else
             {
-                if (target.x > this.transform.position.x + 0.2f || target.x < this.transform.position.x - 0.2f)
+                if (target.x > this.transform.position.x + stopRange || target.x < this.transform.position.x - stopRange)
                 {
                     MoveTowardTarget(target);
                 }

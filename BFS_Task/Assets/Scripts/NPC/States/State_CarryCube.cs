@@ -9,16 +9,18 @@ namespace ExampleCompany.BoxGame.NPC.StateMachine
     /// </summary>
     public class State_CarryCube : NPCState
     {
-        [SerializeField] NPCStateMachine stateMachine;
-        [SerializeField] State_Idle state_idle;
-        [SerializeField] NPCController controller;
-        [SerializeField] CubeSpawner cubeSpawner;
+        [SerializeField] NPCStateMachine stateMachine = null;
+        [SerializeField] State_Idle state_idle = null;
+        [SerializeField] NPCController controller = null;
+        [SerializeField] CubeSpawner cubeSpawner = null;
 
 
-        [SerializeField] DropoffPoint targetDropoffRed;
-        [SerializeField] DropoffPoint targetDropoffBlue;
-        DropoffPoint target;
-        Box.Box box;
+        [SerializeField] DropoffPoint targetDropoffRed = null;
+        [SerializeField] DropoffPoint targetDropoffBlue = null;
+        DropoffPoint target = null;
+        Box.Box box = null;
+
+        [SerializeField] float dropoffRange = 0.5f;
 
         public void HoldBox(Box.Box newBox)
         {
@@ -50,7 +52,7 @@ namespace ExampleCompany.BoxGame.NPC.StateMachine
         public override void Tick()
         {
             //If the dropoff point is close enough, drop off the box.  If not, verify heading and continue.
-            if (Vector3.Distance(transform.position, target.transform.position) < 0.5f)
+            if (Vector3.Distance(transform.position, target.transform.position) < dropoffRange)
             {
                 DropOffBox();
             }

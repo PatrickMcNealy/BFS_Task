@@ -1,5 +1,3 @@
-using ExampleCompany.BoxGame.Box;
-using ExampleCompany.BoxGame.NPC;
 using UnityEngine;
 
 namespace ExampleCompany.BoxGame.NPC.StateMachine
@@ -9,11 +7,11 @@ namespace ExampleCompany.BoxGame.NPC.StateMachine
     /// </summary>
     public class State_GetCube : NPCState
     {
-        Box.Box target;
-        [SerializeField] NPCController controller;
-        [SerializeField] NPCStateMachine stateMachine;
-        [SerializeField] State_Idle state_Idle;
-        [SerializeField] State_CarryCube state_carryCube;
+        Box.Box target = null;
+        [SerializeField] NPCController controller = null;
+        [SerializeField] NPCStateMachine stateMachine = null;
+        [SerializeField] State_Idle state_Idle = null;
+        [SerializeField] State_CarryCube state_carryCube = null;
 
         /// <summary>
         /// Set the target.  Must be called before this state can be entered.

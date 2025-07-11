@@ -6,15 +6,15 @@ namespace ExampleCompany.BoxGame.Box
     {
         public enum BOXCOLOR
         {
-            RED,
-            BLUE
+            RED = 0,
+            BLUE = 1
         }
 
         public BOXCOLOR color { get { return _color; } }
-        [SerializeField] BOXCOLOR _color;
+        [SerializeField] BOXCOLOR _color = BOXCOLOR.RED;
 
-        [SerializeField] Rigidbody2D rb2d;
-        [SerializeField] BoxCollider2D collider2d;
+        [SerializeField] Rigidbody2D rb2d = null;
+        [SerializeField] BoxCollider2D collider2d = null;
 
         public void ResetBox()
         {

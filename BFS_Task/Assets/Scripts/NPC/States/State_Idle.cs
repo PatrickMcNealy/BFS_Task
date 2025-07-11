@@ -1,5 +1,4 @@
 using ExampleCompany.BoxGame.Box;
-using ExampleCompany.BoxGame.GameLogic;
 using UnityEngine;
 
 namespace ExampleCompany.BoxGame.NPC.StateMachine
@@ -9,10 +8,10 @@ namespace ExampleCompany.BoxGame.NPC.StateMachine
     /// </summary>
     public class State_Idle : NPCState
     {
-        [SerializeField] NPCStateMachine stateMachine;
-        [SerializeField] NPCController controller;
-        [SerializeField] CubeSpawner cubeSpawner;
-        [SerializeField] State_GetCube state_getCube;
+        [SerializeField] NPCStateMachine stateMachine = null;
+        [SerializeField] NPCController controller = null;
+        [SerializeField] CubeSpawner cubeSpawner = null;
+        [SerializeField] State_GetCube state_getCube = null;
 
         public override void EnterState()
         {

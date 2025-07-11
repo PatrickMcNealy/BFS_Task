@@ -7,15 +7,15 @@ namespace ExampleCompany.BoxGame.Box
 {
     public class CubeSpawner : LogicSystem
     {
-        [SerializeField] GameObject RedCube;
-        [SerializeField] GameObject BlueCube;
+        [SerializeField] GameObject RedCube = null;
+        [SerializeField] GameObject BlueCube = null;
 
-        [SerializeField] float minimumSpawnTimer;
-        [SerializeField] float maximumSpawnTimer;
+        [SerializeField] float minimumSpawnTimer = 0f;
+        [SerializeField] float maximumSpawnTimer = 0f;
 
-        [SerializeField] float leftBounds;
-        [SerializeField] float rightBounds;
-        [SerializeField] float spawnHeight;
+        [SerializeField] float leftBounds = 0f;
+        [SerializeField] float rightBounds = 0f;
+        [SerializeField] float spawnHeight = 0f;
 
         public List<Box> activeBoxPool = new List<Box>();
         List<Box> inactiveBoxPool = new List<Box>();

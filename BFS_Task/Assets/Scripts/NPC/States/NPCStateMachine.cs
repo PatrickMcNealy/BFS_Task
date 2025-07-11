@@ -9,7 +9,7 @@ namespace ExampleCompany.BoxGame.NPC.StateMachine
     public class NPCStateMachine : MonoBehaviour
     {
 
-        [SerializeField] State_Idle state_Idle;
+        [SerializeField] State_Idle state_Idle = null;
 
 
         private NPCState currentState;
